@@ -1,10 +1,24 @@
+import { useState } from 'react';
 import './App.css';
+import AddTodo from './components/AddTodo/AddTodo';
+import TodoList from './components/TodoList/TodoList';
 
 function App() {
+  const [todos, setTodos] = useState([
+    { id: 1, text: 'todo 1', isFinished: true },
+    { id: 2, text: 'todo 2', isFinished: false },
+    { id: 3, text: 'todo 3', isFinished: true }
+  ]);
+
+  function addTodos(todoText) {
+    let nextId = todos.length + 1
+    setTodos([...todos, { id: nextId, isFinished: false, text: todoText }])
+  }
   return (
-    <div className="App">
-      <h3>To Do App Test</h3>
-    </div>
+    <>
+      <AddTodo addTodos={addTodos} />
+      <TodoList todos={todos} />
+    </>
   );
 }
 
